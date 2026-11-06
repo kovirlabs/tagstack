@@ -1,0 +1,8 @@
+# Each project is its own repository, checked out here.
+/tagbrush/
+/tagaction/
+/tagcheck/
+/tagkit/
+.remember/
+node_modules/
+.DS_Store

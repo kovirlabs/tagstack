@@ -1,0 +1,25 @@
+name: CI
+
+# Checks that the family llms.txt matches the projects it describes.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: '0 6 * * 1' # weekly, to catch drift when a project changes
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with: { repository: kovirlabs/tagbrush, path: tagbrush }
+      - uses: actions/checkout@v4
+        with: { repository: kovirlabs/tagaction, path: tagaction }
+      - uses: actions/checkout@v4
+        with: { repository: kovirlabs/tagcheck, path: tagcheck }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node scripts/check.mjs

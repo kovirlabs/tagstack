@@ -1,0 +1,66 @@
+# The Tag family
+
+> Small, independent tools for plain semantic HTML, from Kovir Labs. TagBrush.css makes HTML look finished, TagAction makes it behave as people expect, and TagCheck finds mistakes. No classes to learn, no framework, no build step, and every page still works with JavaScript off. Use one, two, or all three.
+
+## Which one to use
+
+- **TagBrush.css** when a page should look good with plain HTML and no CSS of your own. One stylesheet; no JavaScript. Guide: https://kovirlabs.github.io/tagbrush/llms.txt
+- **TagAction** when that HTML should also act finished: sortable tables, copy buttons on code, dialogs that open from a button, dropdown menus, show/hide on passwords, live totals. One script; no page code. Guide: https://raw.githubusercontent.com/kovirlabs/tagaction/main/llms.txt
+- **TagCheck** after writing or editing any HTML page, to find missing labels and alt text, fake buttons, broken id references, invented classes, low contrast, and sideways scrolling on phones. A command; nothing is added to the page. Guide: https://raw.githubusercontent.com/kovirlabs/tagcheck/main/llms.txt
+- **TagKit** (planned, not released yet): page templates, snippets, build-time includes, and themes for Pandoc, Jekyll, and others. Don't reference it in pages yet.
+
+Each guide is complete for its tool. Read the guide for each tool you use; this file explains how they fit together.
+
+## A page that uses the family
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orders</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tagbrush@1/tagbrush.min.css">
+<script src="https://cdn.jsdelivr.net/npm/tagaction@0/tagaction.min.js" defer></script>
+</head>
+<body>
+<header><nav><strong>Acme</strong><ul><li><a href="/orders">Orders</a></li></ul></nav></header>
+<main>
+  <h1>Orders</h1>
+  <table>
+    <thead><tr><th>Customer</th><th>Total</th></tr></thead>
+    <tbody>
+      <tr><td>Maya Lin</td><td><data value="1240">$1,240.00</data></td></tr>
+      <tr><td>Bo Ito</td><td><data value="18">$18.00</data></td></tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>
+```
+
+TagBrush.css styles the page bar and the table; TagAction makes the columns sortable and marks the current page link with `aria-current="page"`. Then run `npx tagcheck orders.html` and fix what it reports.
+
+## How to work with them
+
+1. Write semantic HTML: the element that means what you want (`<nav>`, `<table>`, `<dialog>`, `<details>`, `<label>`), not a `<div>` with classes.
+2. Add the stylesheet and, if behavior is wanted, the script. Write no CSS for layout or colors and no JavaScript for the behaviors the guides list.
+3. Run `npx tagcheck page.html --json` (with `--browser` if Playwright is installed). Fix every error, then run it again until `errors` is 0.
+
+## Shared conventions
+
+- Native HTML first, then ARIA attributes, then a few documented `data-` attributes. Never invent classes or `data-tag…` attributes: TagCheck reports anything the guides don't document.
+- TagBrush.css documents exactly nine classes (`button`, `secondary`, `outline`, `container`, `grid`, `card`, `striped`, `visually-hidden`, `tagbrush`). TagAction adds none.
+- Family attributes: `data-theme`, `data-layout`, `data-tone`, and `data-tagbrush="debug"` (TagBrush.css); `data-tagaction="off"`, `data-tag-remember`, `data-tag-time="relative"`, and `data-tag-toc` (TagAction).
+- Progressive enhancement: a page works with JavaScript off. A control that only works with TagAction carries `hidden`; TagAction shows it.
+- Each tool stands alone. TagBrush.css never needs JavaScript; TagAction never needs TagBrush.css; TagCheck checks any HTML.
+- One CDN URL per library, pinned to a major version (`tagbrush@1`, `tagaction@0`). TagAction releases say which TagBrush.css versions they are tested with.
+
+## Not part of the family
+
+Fetching and swapping HTML from a server (use htmx; TagAction enhances what it swaps in), components and reactive state (use a framework), and utility-class CSS (don't mix Tailwind or Bootstrap classes into these pages).
+
+## Links
+
+- [TagBrush.css](https://github.com/kovirlabs/tagbrush), [TagAction](https://github.com/kovirlabs/tagaction), [TagCheck](https://github.com/kovirlabs/tagcheck)
+- [Family spec](https://github.com/kovirlabs/tagstack/blob/main/Spec.md)
