@@ -7,7 +7,7 @@
 - **TagBrush.css** when a page should look good with plain HTML and no CSS of your own. One stylesheet; no JavaScript. Guide: https://kovirlabs.github.io/tagbrush/llms.txt
 - **TagAction** when that HTML should also act finished: sortable tables, copy buttons on code, dialogs that open from a button, dropdown menus, show/hide on passwords, live totals. One script; no page code. Guide: https://raw.githubusercontent.com/kovirlabs/tagaction/main/llms.txt
 - **TagCheck** after writing or editing any HTML page, to find missing labels and alt text, fake buttons, broken id references, invented classes, low contrast, and sideways scrolling on phones. A command; nothing is added to the page. Guide: https://raw.githubusercontent.com/kovirlabs/tagcheck/main/llms.txt
-- **TagKit** when starting a page or adding a common section: copy-paste page templates (landing, dashboard, docs, blog post, sign-up, admin table) and snippets (hero, pricing, FAQ, stat tiles, data table, dialogs, forms), plus a Pandoc template for documents and a Jekyll theme for GitHub Pages (`remote_theme: kovirlabs/tagkit-jekyll`), all tested with the other three. Guide: https://raw.githubusercontent.com/kovirlabs/tagkit/main/llms.txt
+- **TagKit** when starting a page or adding a common section: copy-paste page templates (landing, dashboard, docs, blog post, sign-up, admin table) and snippets (hero, pricing, FAQ, stat tiles, data table, dialogs, forms), plus `npx @kovirlabs/tagkit build` to share a header and footer between static pages at build time, a Pandoc template for documents, and a Jekyll theme for GitHub Pages (`remote_theme: kovirlabs/tagkit-jekyll`), all tested with the other three. Guide: https://raw.githubusercontent.com/kovirlabs/tagkit/main/llms.txt
 
 Each guide is complete for its tool. Read the guide for each tool you use; this file explains how they fit together.
 
@@ -39,13 +39,13 @@ Each guide is complete for its tool. Read the guide for each tool you use; this 
 </html>
 ```
 
-TagBrush.css styles the page bar and the table; TagAction makes the columns sortable and marks the current page link with `aria-current="page"`. Then run `npx tagcheck orders.html` and fix what it reports.
+TagBrush.css styles the page bar and the table; TagAction makes the columns sortable and marks the current page link with `aria-current="page"`. Then run `npx @kovirlabs/tagcheck orders.html` and fix what it reports.
 
 ## How to work with them
 
 1. Start from a TagKit template or snippet when one fits, or write semantic HTML: the element that means what you want (`<nav>`, `<table>`, `<dialog>`, `<details>`, `<label>`), not a `<div>` with classes.
 2. Add the stylesheet and, if behavior is wanted, the script. Write no CSS for layout or colors and no JavaScript for the behaviors the guides list.
-3. Run `npx tagcheck page.html --json` (with `--browser` if Playwright is installed). Fix every error, then run it again until `errors` is 0.
+3. Run `npx @kovirlabs/tagcheck page.html --json` (with `--browser` if Playwright is installed). Fix every error, then run it again until `errors` is 0.
 
 ## Shared conventions
 
