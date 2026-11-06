@@ -7,7 +7,7 @@
 - **TagBrush.css** when a page should look good with plain HTML and no CSS of your own. One stylesheet; no JavaScript. Guide: https://kovirlabs.github.io/tagbrush/llms.txt
 - **TagAction** when that HTML should also act finished: sortable tables, copy buttons on code, dialogs that open from a button, dropdown menus, show/hide on passwords, live totals. One script; no page code. Guide: https://raw.githubusercontent.com/kovirlabs/tagaction/main/llms.txt
 - **TagCheck** after writing or editing any HTML page, to find missing labels and alt text, fake buttons, broken id references, invented classes, low contrast, and sideways scrolling on phones. A command; nothing is added to the page. Guide: https://raw.githubusercontent.com/kovirlabs/tagcheck/main/llms.txt
-- **TagKit** when starting a page or adding a common section: copy-paste page templates (landing, dashboard, docs, blog post, sign-up, admin table) and snippets (hero, pricing, FAQ, stat tiles, data table, dialogs, forms), all tested with the other three. Guide: https://raw.githubusercontent.com/kovirlabs/tagkit/main/llms.txt
+- **TagKit** when starting a page or adding a common section: copy-paste page templates (landing, dashboard, docs, blog post, sign-up, admin table) and snippets (hero, pricing, FAQ, stat tiles, data table, dialogs, forms), plus a Pandoc template for documents and a Jekyll theme for GitHub Pages (`remote_theme: kovirlabs/tagkit-jekyll`), all tested with the other three. Guide: https://raw.githubusercontent.com/kovirlabs/tagkit/main/llms.txt
 
 Each guide is complete for its tool. Read the guide for each tool you use; this file explains how they fit together.
 

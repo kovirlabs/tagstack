@@ -10,6 +10,7 @@ This repository is the family's home: the shared spec, the family-wide [`llms.tx
 | [TagAction](https://github.com/kovirlabs/tagaction) | Behaviors for semantic tags | 0.1.0, unreleased |
 | [TagCheck](https://github.com/kovirlabs/tagcheck) | Semantic and accessibility checker | 0.1.0, unreleased |
 | [TagKit](https://github.com/kovirlabs/tagkit) | Templates, snippets, includes, themes | 0.1.0, unreleased |
+| [TagKit for Jekyll](https://github.com/kovirlabs/tagkit-jekyll) | GitHub Pages remote theme (part of TagKit) | 0.1.0, unreleased |
 
 See [Spec.md](Spec.md) for the plan and [CLAUDE.md](CLAUDE.md) for working rules.
 
@@ -19,7 +20,7 @@ Clone each project into this folder; they are ignored by this repository's git:
 
 ```sh
 git clone https://github.com/kovirlabs/tagstack.git && cd tagstack
-for p in tagbrush tagaction tagcheck tagkit; do git clone https://github.com/kovirlabs/$p.git; done
+for p in tagbrush tagaction tagcheck tagkit tagkit-jekyll; do git clone https://github.com/kovirlabs/$p.git; done
 ```
 
 `node scripts/check.mjs` checks that `llms.txt` matches the projects: its example page passes TagCheck, the classes and attributes it lists are exactly the documented ones, its CDN lines match each project's guide, and every project's `llms.txt` links back to it. CI runs it on every change and weekly.

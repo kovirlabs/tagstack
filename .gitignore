@@ -6,3 +6,4 @@
 .remember/
 node_modules/
 .DS_Store
+/tagkit-jekyll/
