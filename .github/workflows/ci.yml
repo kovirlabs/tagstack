@@ -20,6 +20,8 @@ jobs:
         with: { repository: kovirlabs/tagaction, path: tagaction }
       - uses: actions/checkout@v4
         with: { repository: kovirlabs/tagcheck, path: tagcheck }
+      - uses: actions/checkout@v4
+        with: { repository: kovirlabs/tagkit, path: tagkit }
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - run: node scripts/check.mjs

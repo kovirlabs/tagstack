@@ -38,7 +38,7 @@ for (const [project, url] of guide.matchAll(/(tagbrush|tagaction)@\d+\/[\w.]+/g)
 for (const project of ['tagbrush', 'tagaction', 'tagcheck', 'tagkit']) {
   const path = `${project}/llms.txt`;
   if (!existsSync(path)) {
-    expect(guide.includes('**TagKit** (planned') || project !== 'tagkit', `${project} has no llms.txt`);
+    failures.push(`${project} has no llms.txt`);
     continue;
   }
   expect(readFileSync(path, 'utf8').includes(FAMILY_URL), `${path} doesn't link to ${FAMILY_URL}`);

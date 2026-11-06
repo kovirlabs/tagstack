@@ -1,13 +1,13 @@
 # The Tag family
 
-> Small, independent tools for plain semantic HTML, from Kovir Labs. TagBrush.css makes HTML look finished, TagAction makes it behave as people expect, and TagCheck finds mistakes. No classes to learn, no framework, no build step, and every page still works with JavaScript off. Use one, two, or all three.
+> Small, independent tools for plain semantic HTML, from Kovir Labs. TagBrush.css makes HTML look finished, TagAction makes it behave as people expect, TagCheck finds mistakes, and TagKit gives you finished pages and sections to start from. No classes to learn, no framework, no build step, and every page still works with JavaScript off. Use any of them, alone or together.
 
 ## Which one to use
 
 - **TagBrush.css** when a page should look good with plain HTML and no CSS of your own. One stylesheet; no JavaScript. Guide: https://kovirlabs.github.io/tagbrush/llms.txt
 - **TagAction** when that HTML should also act finished: sortable tables, copy buttons on code, dialogs that open from a button, dropdown menus, show/hide on passwords, live totals. One script; no page code. Guide: https://raw.githubusercontent.com/kovirlabs/tagaction/main/llms.txt
 - **TagCheck** after writing or editing any HTML page, to find missing labels and alt text, fake buttons, broken id references, invented classes, low contrast, and sideways scrolling on phones. A command; nothing is added to the page. Guide: https://raw.githubusercontent.com/kovirlabs/tagcheck/main/llms.txt
-- **TagKit** (planned, not released yet): page templates, snippets, build-time includes, and themes for Pandoc, Jekyll, and others. Don't reference it in pages yet.
+- **TagKit** when starting a page or adding a common section: copy-paste page templates (landing, dashboard, docs, blog post, sign-up, admin table) and snippets (hero, pricing, FAQ, stat tiles, data table, dialogs, forms), all tested with the other three. Guide: https://raw.githubusercontent.com/kovirlabs/tagkit/main/llms.txt
 
 Each guide is complete for its tool. Read the guide for each tool you use; this file explains how they fit together.
 
@@ -43,7 +43,7 @@ TagBrush.css styles the page bar and the table; TagAction makes the columns sort
 
 ## How to work with them
 
-1. Write semantic HTML: the element that means what you want (`<nav>`, `<table>`, `<dialog>`, `<details>`, `<label>`), not a `<div>` with classes.
+1. Start from a TagKit template or snippet when one fits, or write semantic HTML: the element that means what you want (`<nav>`, `<table>`, `<dialog>`, `<details>`, `<label>`), not a `<div>` with classes.
 2. Add the stylesheet and, if behavior is wanted, the script. Write no CSS for layout or colors and no JavaScript for the behaviors the guides list.
 3. Run `npx tagcheck page.html --json` (with `--browser` if Playwright is installed). Fix every error, then run it again until `errors` is 0.
 
@@ -62,5 +62,5 @@ Fetching and swapping HTML from a server (use htmx; TagAction enhances what it s
 
 ## Links
 
-- [TagBrush.css](https://github.com/kovirlabs/tagbrush), [TagAction](https://github.com/kovirlabs/tagaction), [TagCheck](https://github.com/kovirlabs/tagcheck)
+- [TagBrush.css](https://github.com/kovirlabs/tagbrush), [TagAction](https://github.com/kovirlabs/tagaction), [TagCheck](https://github.com/kovirlabs/tagcheck), [TagKit](https://github.com/kovirlabs/tagkit) ([gallery](https://kovirlabs.github.io/tagkit/))
 - [Family spec](https://github.com/kovirlabs/tagstack/blob/main/Spec.md)
