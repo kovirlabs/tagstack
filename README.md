@@ -12,7 +12,7 @@ This repository is the family's home: the shared spec, the family-wide [`llms.tx
 | [TagKit](https://github.com/kovirlabs/tagkit) | Templates, snippets, includes, themes | 0.1.0, unreleased |
 | [TagKit for Jekyll](https://github.com/kovirlabs/tagkit-jekyll) | GitHub Pages remote theme (part of TagKit) | 0.1.0, unreleased |
 
-See [Spec.md](Spec.md) for the plan and [CLAUDE.md](CLAUDE.md) for working rules.
+See [Spec.md](Spec.md) for the plan, [CLAUDE.md](CLAUDE.md) for working rules, and [RELEASING.md](RELEASING.md) for publishing to npm.
 
 ## Workspace
 
