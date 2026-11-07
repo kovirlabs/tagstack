@@ -4,46 +4,124 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Tag family: plain HTML that looks, acts, and checks out</title>
-<meta name="description" content="TagBrush.css, TagAction, and TagCheck: small, independent tools for plain semantic HTML from Kovir Labs.">
+<meta name="description" content="TagBrush.css, TagAction, TagCheck, and TagKit: small, independent tools for plain semantic HTML from Kovir Labs. No classes to learn, no framework, no build step.">
+<link rel="icon" href="mark.svg" type="image/svg+xml">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tagbrush@1/tagbrush.min.css">
+<link rel="stylesheet" href="brand.css">
+<script src="https://cdn.jsdelivr.net/npm/tagaction@0/tagaction.min.js" defer></script>
 </head>
 <body>
 <header>
-  <nav><strong>The Tag family</strong><ul><li><a href="llms.txt">llms.txt</a></li><li><a href="https://github.com/kovirlabs/tagstack">GitHub</a></li></ul></nav>
+  <nav aria-label="Tag family" data-brand="bar">
+    <a href="https://kovirlabs.github.io/tagstack/" aria-current="page"><img src="mark.svg" alt="" width="24" height="24">Tag family</a>
+    <ul>
+      <li><a href="https://kovirlabs.github.io/tagbrush/">TagBrush.css</a></li>
+      <li><a href="https://kovirlabs.github.io/tagaction/">TagAction</a></li>
+      <li><a href="https://kovirlabs.github.io/tagcheck/">TagCheck</a></li>
+      <li><a href="https://kovirlabs.github.io/tagkit/">TagKit</a></li>
+      <li><a href="https://github.com/kovirlabs/tagstack">GitHub</a></li>
+    </ul>
+  </nav>
   <hgroup>
     <h1>Plain HTML that looks, acts, and checks out</h1>
-    <p>Small, independent tools for semantic HTML. No classes to learn, no framework, no build step.</p>
+    <p>Small, independent tools for semantic HTML. No classes to learn, no framework, no build step, and every page still works with JavaScript off.</p>
   </hgroup>
+  <div role="group">
+    <a class="button" href="#tools">Meet the tools</a>
+    <a class="button secondary" href="llms.txt">Guide for AI agents</a>
+  </div>
 </header>
 <main>
-  <section>
+  <section id="tools">
     <h2>The tools</h2>
+    <p>Use one, or all four. Each stands alone.</p>
     <article>
       <h3>TagBrush.css</h3>
-      <p>One stylesheet that makes plain HTML look finished, in light and dark mode.</p>
-      <p><a href="https://github.com/kovirlabs/tagbrush">TagBrush.css on GitHub</a></p>
+      <p>One stylesheet that makes plain HTML look finished, in light and dark mode. No JavaScript.</p>
+      <p><a href="https://kovirlabs.github.io/tagbrush/">Demo and theme builder</a></p>
     </article>
     <article>
       <h3>TagAction</h3>
-      <p>One script that makes tags behave: sortable tables, copy buttons, dialogs, menus.</p>
-      <p><a href="https://github.com/kovirlabs/tagaction">TagAction on GitHub</a></p>
+      <p>One script that makes tags behave: sortable tables, copy buttons, dialogs, menus, live totals.</p>
+      <p><a href="https://kovirlabs.github.io/tagaction/">Try every behavior</a></p>
     </article>
     <article>
       <h3>TagCheck</h3>
       <p>A command that finds semantic and accessibility mistakes, for people, CI, and AI agents.</p>
-      <p><a href="https://github.com/kovirlabs/tagcheck">TagCheck on GitHub</a></p>
+      <p><a href="https://kovirlabs.github.io/tagcheck/">What it checks</a></p>
     </article>
     <article>
       <h3>TagKit</h3>
-      <p>Page templates and snippets to copy: landing pages, dashboards, docs, pricing, dialogs, forms.</p>
-      <p><a href="https://kovirlabs.github.io/tagkit/">The TagKit gallery</a></p>
+      <p>Page templates and snippets to copy, plus themes for Jekyll, MkDocs, Hugo, WordPress, and Pandoc.</p>
+      <p><a href="https://kovirlabs.github.io/tagkit/">The gallery</a></p>
     </article>
   </section>
-  <section>
-    <h2>For AI agents</h2>
-    <p>Start with the family guide, <a href="llms.txt">llms.txt</a>. It says which tool to use when and links to each tool's own guide.</p>
+
+  <section id="example">
+    <h2>One page, three tools</h2>
+    <p>This is the whole page: two lines in <code>&lt;head&gt;</code> and the HTML that means what you want.</p>
+    <pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tagbrush@1/tagbrush.min.css"&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/tagaction@0/tagaction.min.js" defer&gt;&lt;/script&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Customer&lt;/th&gt;&lt;th&gt;Total&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Maya Lin&lt;/td&gt;&lt;td&gt;&lt;data value="1240"&gt;$1,240.00&lt;/data&gt;&lt;/td&gt;&lt;td&gt;&lt;mark data-tone="success"&gt;Paid&lt;/mark&gt;&lt;/td&gt;&lt;/tr&gt;
+    …
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+    <p>TagBrush.css styles it, TagAction makes the columns sortable (click a header), and <code>npx @kovirlabs/tagcheck page.html</code> confirms nothing is missing.</p>
+    <figure>
+      <table>
+        <caption>Recent orders</caption>
+        <thead><tr><th>Customer</th><th>Total</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Maya Lin</td><td><data value="1240">$1,240.00</data></td><td><mark data-tone="success">Paid</mark></td></tr>
+          <tr><td>Alex Chen</td><td><data value="95">$95.00</data></td><td><mark data-tone="warning">Pending</mark></td></tr>
+          <tr><td>Zoë Park</td><td><data value="310.5">$310.50</data></td><td><mark data-tone="success">Paid</mark></td></tr>
+          <tr><td>Bo Ito</td><td><data value="18">$18.00</data></td><td><mark data-tone="error">Refunded</mark></td></tr>
+        </tbody>
+      </table>
+    </figure>
+  </section>
+
+  <section id="themes">
+    <h2>Start from a theme</h2>
+    <p>TagKit's themes put the same look on the tools you already publish with.</p>
+    <ul>
+      <li><a href="https://kovirlabs.github.io/tagkit-jekyll/">Jekyll</a>: a GitHub Pages site styled with one config line.</li>
+      <li><a href="https://kovirlabs.github.io/tagkit-wordpress/">WordPress</a>: a block theme whose Primary color themes the whole site.</li>
+      <li><a href="https://github.com/kovirlabs/tagkit/tree/main/themes/mkdocs">MkDocs</a> and <a href="https://github.com/kovirlabs/tagkit/tree/main/themes/hugo">Hugo</a>: docs sites and blogs.</li>
+      <li><a href="https://github.com/kovirlabs/tagkit/tree/main/themes/pandoc">Pandoc</a>: Markdown or Word documents to a styled page.</li>
+    </ul>
+  </section>
+
+  <section id="agents">
+    <h2>Built for AI coding agents too</h2>
+    <p>Every tool has an <code>llms.txt</code> guide, and the family guide says which one to use when. An agent writes semantic HTML, runs TagCheck with <code>--json</code>, and fixes what it reports without a person.</p>
+    <ul>
+      <li><a href="llms.txt">The family guide (llms.txt)</a></li>
+      <li><a href="https://github.com/kovirlabs/tagstack/tree/main/evals">The family agent evaluation</a>: fresh agents build pages from plain requests, and the results are scored.</li>
+    </ul>
+  </section>
+
+  <section id="rules">
+    <h2>What the family keeps to</h2>
+    <dl>
+      <dt>Native HTML first</dt>
+      <dd>Then ARIA attributes, then a few documented <code>data-</code> attributes. Never classes as an API.</dd>
+      <dt>Works with JavaScript off</dt>
+      <dd>A control that needs a script carries <code>hidden</code> until the script shows it.</dd>
+      <dt>No build step</dt>
+      <dd>One CDN line per library, pinned to a major version.</dd>
+      <dt>Accessible by default</dt>
+      <dd>WCAG AA contrast in light and dark mode, full keyboard support, and checks to prove it.</dd>
+    </dl>
+    <p>Read <a href="brand.html">the brand</a> to use the family's look on a page of your own.</p>
   </section>
 </main>
-<footer><p>A Kovir Labs project. Apache-2.0.</p></footer>
+<footer data-brand="footer">
+  <p>The Tag family from Kovir Labs: <a href="https://kovirlabs.github.io/tagbrush/">TagBrush.css</a>, <a href="https://kovirlabs.github.io/tagaction/">TagAction</a>, <a href="https://kovirlabs.github.io/tagcheck/">TagCheck</a>, and <a href="https://kovirlabs.github.io/tagkit/">TagKit</a>. Open source under Apache-2.0.</p>
+</footer>
 </body>
 </html>

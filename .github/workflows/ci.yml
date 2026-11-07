@@ -27,8 +27,8 @@ jobs:
         with: { node-version: 22 }
       - run: node scripts/check.mjs
 
-  # The family agent evaluation (evals/): scores the agent-written pages
-  # against the published packages.
+  # The family site and brand (tests/), and the family agent evaluation
+  # (evals/), scored against the published packages.
   evals:
     runs-on: ubuntu-latest
     timeout-minutes: 15

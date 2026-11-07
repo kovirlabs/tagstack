@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Tag family brand</title>
+<meta name="description" content="The Tag family's mark, colors, and shared theme: one TagBrush.css theme, a family bar, and a footer that every family site reuses.">
+<link rel="icon" href="mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tagbrush@1/tagbrush.min.css">
+<link rel="stylesheet" href="brand.css">
+<script src="https://cdn.jsdelivr.net/npm/tagaction@0/tagaction.min.js" defer></script>
+</head>
+<body>
+<header>
+  <nav aria-label="Tag family" data-brand="bar">
+    <a href="https://kovirlabs.github.io/tagstack/"><img src="mark.svg" alt="" width="24" height="24">Tag family</a>
+    <ul>
+      <li><a href="https://kovirlabs.github.io/tagbrush/">TagBrush.css</a></li>
+      <li><a href="https://kovirlabs.github.io/tagaction/">TagAction</a></li>
+      <li><a href="https://kovirlabs.github.io/tagcheck/">TagCheck</a></li>
+      <li><a href="https://kovirlabs.github.io/tagkit/">TagKit</a></li>
+      <li><a href="https://github.com/kovirlabs/tagstack">GitHub</a></li>
+    </ul>
+  </nav>
+  <hgroup>
+    <h1>The brand</h1>
+    <p>One mark, one violet, and one shared theme. Every family site links the same file, so a change here shows up everywhere.</p>
+  </hgroup>
+</header>
+<main>
+  <aside><nav data-tag-toc aria-label="On this page"></nav></aside>
+  <article>
+    <h2>The mark</h2>
+    <p>Angle brackets around a slash: a closing tag, on a violet square. It reads the same in light and dark mode.</p>
+    <figure>
+      <img src="mark.svg" alt="The Tag family mark: white angle brackets and a slash on a violet rounded square" width="96" height="96">
+      <figcaption><a href="mark.svg" download>mark.svg</a>, 32 by 32, also the favicon.</figcaption>
+    </figure>
+
+    <h2>Color and type</h2>
+    <table data-tagaction="off">
+      <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td><code>--color-primary</code></td><td><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect width="16" height="16" rx="3" fill="#7c3aed"/></svg> <code>#7c3aed</code></td><td>The mark, buttons, links, and focus rings. TagBrush.css darkens or lightens links as needed to stay readable.</td></tr>
+        <tr><td><code>--color-on-primary</code></td><td><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="0.5" y="0.5" width="15" height="15" rx="3" fill="#ffffff" stroke="#888"/></svg> <code>#ffffff</code></td><td>Text on violet: 5.7:1.</td></tr>
+        <tr><td>Neutrals</td><td>Tinted with the violet</td><td>Background, surface, text, and borders, from TagBrush.css's formulas.</td></tr>
+        <tr><td><code>--font-weight-heading</code></td><td><code>700</code></td><td>Headings, in the system font.</td></tr>
+        <tr><td><code>--border-radius</code></td><td><code>0.5rem</code></td><td>Buttons, fields, cards, and code blocks.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Use the theme</h2>
+    <p>Link it after TagBrush.css. It holds only TagBrush.css variables and the family bar's few rules.</p>
+    <pre><code>&lt;link rel="icon" href="https://kovirlabs.github.io/tagstack/mark.svg" type="image/svg+xml"&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tagbrush@1/tagbrush.min.css"&gt;
+&lt;link rel="stylesheet" href="https://kovirlabs.github.io/tagstack/brand.css"&gt;</code></pre>
+    <p>A page that has to show TagBrush.css's default look, like <a href="https://kovirlabs.github.io/tagbrush/">TagBrush.css's own demo</a>, adds <code>data-brand="chrome"</code> to <code>&lt;html&gt;</code>: only the family bar and the footer carry the brand.</p>
+
+    <h2>The family bar</h2>
+    <p>The first thing in each site's <code>&lt;header&gt;</code>, before the site's own navigation. Mark the current site with <code>aria-current="page"</code>.</p>
+    <pre><code>&lt;nav aria-label="Tag family" data-brand="bar"&gt;
+  &lt;a href="https://kovirlabs.github.io/tagstack/"&gt;&lt;img src="https://kovirlabs.github.io/tagstack/mark.svg" alt="" width="24" height="24"&gt;Tag family&lt;/a&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="https://kovirlabs.github.io/tagbrush/"&gt;TagBrush.css&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://kovirlabs.github.io/tagaction/"&gt;TagAction&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://kovirlabs.github.io/tagcheck/"&gt;TagCheck&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://kovirlabs.github.io/tagkit/"&gt;TagKit&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://github.com/kovirlabs/REPO"&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+
+    <h2>The footer</h2>
+    <p>The site's own line first, then the family line.</p>
+    <pre><code>&lt;footer data-brand="footer"&gt;
+  &lt;p&gt;…about this site…&lt;/p&gt;
+  &lt;p&gt;Part of the &lt;a href="https://kovirlabs.github.io/tagstack/"&gt;Tag family&lt;/a&gt; from Kovir Labs.&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+
+    <h2>Keep to</h2>
+    <ul>
+      <li>Write the name as <strong>Tag family</strong>, and each tool as <strong>TagBrush.css</strong>, <strong>TagAction</strong>, <strong>TagCheck</strong>, <strong>TagKit</strong>.</li>
+      <li>No classes for the brand: it styles <code>data-brand</code> elements and TagBrush.css variables only, so every family page still passes TagCheck.</li>
+      <li>Don't recolor the mark. On a photo or a busy background, put it on a plain surface.</li>
+    </ul>
+  </article>
+</main>
+<footer data-brand="footer">
+  <p>The Tag family from Kovir Labs. Open source under Apache-2.0.</p>
+</footer>
+</body>
+</html>

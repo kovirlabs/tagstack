@@ -1,0 +1,64 @@
+/*
+ * The Tag family brand: a TagBrush.css theme shared by every family site.
+ *
+ * Link it after TagBrush.css:
+ *   <link rel="stylesheet" href="https://kovirlabs.github.io/tagstack/brand.css">
+ *
+ * It brands the whole page. A page that has to show TagBrush.css's default
+ * look (TagBrush.css's own demo) puts data-brand="chrome" on <html>, and
+ * then only the family bar and the footer carry the brand.
+ *
+ * The family bar and footer markup to copy is on brand.html.
+ */
+
+/* Colors: one violet; TagBrush.css derives links, buttons, and focus rings
+   from it and keeps them readable in light and dark mode. The neutrals are
+   TagBrush.css's own formulas, repeated here so they take the violet's hue
+   inside the bar and footer too. */
+:root:not([data-brand="chrome"]),
+[data-brand="bar"],
+[data-brand="footer"] {
+  --color-primary: #7c3aed;
+  --color-background: light-dark(#ffffff, oklch(from var(--color-primary) 0.21 calc(c * 0.15) h));
+  --color-surface: light-dark(oklch(from var(--color-primary) 0.967 calc(c * 0.02) h), oklch(from var(--color-primary) 0.278 calc(c * 0.14) h));
+  --color-text: light-dark(oklch(from var(--color-primary) 0.278 calc(c * 0.14) h), oklch(from var(--color-primary) 0.967 calc(c * 0.02) h));
+  --color-text-muted: light-dark(oklch(from var(--color-primary) 0.528 calc(c * 0.08) h), oklch(from var(--color-primary) 0.714 calc(c * 0.09) h));
+  --color-border: light-dark(oklch(from var(--color-primary) 0.928 calc(c * 0.03) h), oklch(from var(--color-primary) 0.373 calc(c * 0.15) h));
+}
+
+/* Shape and type, for fully branded pages */
+:root:not([data-brand="chrome"]) {
+  --font-weight-heading: 700;
+  --border-radius: 0.5rem;
+}
+
+/* The family bar: the first thing in each site's header.
+   <nav aria-label="Tag family" data-brand="bar">…</nav> */
+[data-brand="bar"] {
+  justify-content: flex-start;
+  gap: var(--spacing-xs) var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: var(--border-width) solid var(--color-border);
+  font-size: var(--font-size-sm);
+  text-align: start;
+}
+
+[data-brand="bar"] ul {
+  gap: var(--spacing-xs) var(--spacing-md);
+}
+
+[data-brand="bar"] > a:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--color-text);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+[data-brand="bar"] > a:first-child img {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+}
