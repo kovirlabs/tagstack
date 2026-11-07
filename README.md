@@ -6,10 +6,10 @@ This repository is the family's home: the shared spec, the family-wide [`llms.tx
 
 | Project | Role | Status |
 | --- | --- | --- |
-| [TagBrush.css](https://github.com/kovirlabs/tagbrush) | Classless CSS for semantic HTML | 1.1.0 |
-| [TagAction](https://github.com/kovirlabs/tagaction) | Behaviors for semantic tags | 0.1.0, unreleased |
-| [TagCheck](https://github.com/kovirlabs/tagcheck) | Semantic and accessibility checker | 0.1.0, unreleased |
-| [TagKit](https://github.com/kovirlabs/tagkit) | Templates, snippets, includes, themes | 0.1.0, unreleased |
+| [TagBrush.css](https://github.com/kovirlabs/tagbrush) | Classless CSS for semantic HTML | 1.2.0 |
+| [TagAction](https://github.com/kovirlabs/tagaction) | Behaviors for semantic tags | 0.1.0 |
+| [TagCheck](https://github.com/kovirlabs/tagcheck) | Semantic and accessibility checker | 0.1.0 |
+| [TagKit](https://github.com/kovirlabs/tagkit) | Templates, snippets, includes, themes | 0.1.0 |
 | [TagKit for Jekyll](https://github.com/kovirlabs/tagkit-jekyll) | GitHub Pages remote theme (part of TagKit) | 0.1.0, unreleased |
 | [TagKit for WordPress](https://github.com/kovirlabs/tagkit-wordpress) | WordPress block theme (part of TagKit) | 0.1.0, unreleased |
 
