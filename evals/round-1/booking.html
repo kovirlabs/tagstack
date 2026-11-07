@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book a cabin · Larkspur Cabins</title>
+<meta name="description" content="Book a weekend cabin at Larkspur Cabins on Lake Wren.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tagbrush@1/tagbrush.min.css">
+<script src="https://cdn.jsdelivr.net/npm/tagaction@0/tagaction.min.js" defer></script>
+</head>
+<body>
+<header>
+  <nav><strong>Larkspur Cabins</strong><ul><li><a href="/">Home</a></li><li><a href="/cabins">Cabins</a></li><li><a href="/book" aria-current="page">Book</a></li><li><a href="/contact">Contact</a></li></ul></nav>
+</header>
+<main>
+  <hgroup>
+    <h1>Book your weekend</h1>
+    <p>Three timber cabins on the north shore of Lake Wren. Friday check-in from 3 PM, Sunday check-out by 11 AM.</p>
+  </hgroup>
+
+  <section>
+    <h2 id="photos">A look around</h2>
+    <p>Click a photo to see it larger.</p>
+    <div class="grid">
+      <figure>
+        <a href="images/fern-cabin-large.jpg"><img src="images/fern-cabin.jpg" alt="Fern cabin's front porch with two rocking chairs under pine trees" width="400" height="300"></a>
+        <figcaption>Fern cabin porch</figcaption>
+      </figure>
+      <figure>
+        <a href="images/heron-lodge-large.jpg"><img src="images/heron-lodge.jpg" alt="Heron Lodge living room with a stone fireplace and lake view windows" width="400" height="300"></a>
+        <figcaption>Heron Lodge living room</figcaption>
+      </figure>
+      <figure>
+        <a href="images/lake-dock-large.jpg"><img src="images/lake-dock.jpg" alt="Wooden dock stretching into Lake Wren at sunrise, with mist on the water" width="400" height="300"></a>
+        <figcaption>The dock at sunrise</figcaption>
+      </figure>
+      <figure>
+        <a href="images/firepit-large.jpg"><img src="images/firepit.jpg" alt="Stone fire pit ringed by log benches, with a stack of split firewood" width="400" height="300"></a>
+        <figcaption>Fire pit by Birch cabin</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <article>
+    <h2 id="book">Your booking</h2>
+    <form action="/book" method="post">
+      <fieldset>
+        <legend>Choose a cabin (two-night weekend)</legend>
+        <label><input type="radio" name="cabin" id="cabin-fern" value="320" checked> Fern cabin, sleeps 2: $320</label>
+        <label><input type="radio" name="cabin" id="cabin-birch" value="410"> Birch cabin, sleeps 4: $410</label>
+        <label><input type="radio" name="cabin" id="cabin-heron" value="560"> Heron Lodge, sleeps 6: $560</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Extras (optional)</legend>
+        <label><input type="checkbox" name="extras" id="extra-breakfast" value="45"> Breakfast basket delivered both mornings: $45</label>
+        <label><input type="checkbox" name="extras" id="extra-checkout" value="30"> Late checkout, until 2 PM Sunday: $30</label>
+        <label><input type="checkbox" name="extras" id="extra-firewood" value="15"> Firewood bundle: $15</label>
+      </fieldset>
+
+      <p><strong>Total: $<output name="total" for="cabin-fern cabin-birch cabin-heron extra-breakfast extra-checkout extra-firewood">320</output></strong></p>
+      <small>Taxes included. You pay at check-in; nothing is charged today.</small>
+
+      <label for="arrival">Arrival Friday</label>
+      <input type="date" id="arrival" name="arrival" min="2026-11-13" step="7" value="2026-11-13" required>
+      <small>Pick a Friday.</small>
+
+      <label for="lead-name">Your name</label>
+      <input id="lead-name" name="lead_name" autocomplete="name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" autocomplete="email" required>
+      <small>We send your confirmation and directions here.</small>
+
+      <fieldset>
+        <legend>Other guests</legend>
+        <ul>
+          <li><label>Guest name <input name="guest" autocomplete="off"></label></li>
+          <template id="guest-row"><li><label>Guest name <input name="guest" autocomplete="off"></label></li></template>
+        </ul>
+        <button type="button" class="secondary" commandfor="guest-row" command="--clone" hidden>Add guest</button>
+      </fieldset>
+
+      <label for="notes">Anything we should know? (optional)</label>
+      <textarea id="notes" name="notes" maxlength="300"></textarea>
+
+      <button>Request booking</button>
+    </form>
+  </article>
+</main>
+<footer><p>Larkspur Cabins · 14 Shoreline Road, Lake Wren · (555) 014-2290</p></footer>
+</body>
+</html>

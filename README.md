@@ -25,3 +25,5 @@ for p in tagbrush tagaction tagcheck tagkit tagkit-jekyll tagkit-wordpress; do g
 ```
 
 `node scripts/check.mjs` checks that `llms.txt` matches the projects: its example page passes TagCheck, the classes and attributes it lists are exactly the documented ones, its CDN lines match each project's guide, and every project's `llms.txt` links back to it. CI runs it on every change and weekly.
+
+[`evals/`](evals/) is the family agent evaluation: fresh agents with only the family guide build pages from plain requests, and `npm test` scores them (TagCheck clean, no hand-written JavaScript, usable without JavaScript, and the requested behaviors working). Its README has the findings.

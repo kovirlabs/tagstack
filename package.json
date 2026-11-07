@@ -1,0 +1,18 @@
+{
+  "name": "tagstack",
+  "private": true,
+  "type": "module",
+  "description": "The Tag family's home: the family llms.txt, its consistency check, and the family agent evaluation.",
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "test": "playwright test",
+    "eval:workspace": "node evals/workspace.mjs"
+  },
+  "devDependencies": {
+    "@kovirlabs/tagcheck": "^0.1.1",
+    "@kovirlabs/tagkit": "^0.1.0",
+    "@playwright/test": "1.64.1",
+    "tagaction": "^0.1.0",
+    "tagbrush": "^1.2.0"
+  }
+}

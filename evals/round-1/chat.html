@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" data-density="compact">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas · Retry backoff for the billing webhook</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tagbrush@1/tagbrush.min.css">
+<script src="https://cdn.jsdelivr.net/npm/tagaction@0/tagaction.min.js" defer></script>
+</head>
+<body>
+<header>
+  <nav>
+    <strong>Atlas</strong>
+    <ul>
+      <li><a href="/chats">Chats</a></li>
+      <li><a href="/chats/new">New chat</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <article>
+    <hgroup>
+      <h1>Retry backoff for the billing webhook</h1>
+      <p>Conversation with Atlas · started <time datetime="2026-11-07T14:02Z">Nov 7, 2026, 2:02 PM UTC</time></p>
+    </hgroup>
+
+    <section aria-label="Message from you">
+      <p><strong>You</strong></p>
+      <p>Our Stripe webhook handler fails about 2% of the time when the ledger database is busy. I want to retry with exponential backoff. What delays should I use, and can you show me Python for it?</p>
+    </section>
+
+    <section aria-label="Message from Atlas">
+      <p><strong>Atlas</strong></p>
+      <details data-reasoning>
+        <summary>Thought for 6 seconds</summary>
+        <p>The failures are transient lock contention, so retrying is safe as long as the handler is idempotent. Plain exponential backoff makes every worker retry at the same moments; adding full jitter spreads them out. Stripe itself retries for up to three days, so the in-process retries only need to cover a few seconds before giving up and returning a 500.</p>
+      </details>
+      <p>Use <strong>exponential backoff with full jitter</strong>: each retry waits a random time between zero and a cap that doubles every attempt.<sup><a href="#source-1">1</a></sup> The delay for attempt <var>n</var> is:</p>
+      <math display="block">
+        <mrow>
+          <msub><mi>t</mi><mi>n</mi></msub>
+          <mo>=</mo>
+          <mtext>random</mtext>
+          <mo>(</mo>
+          <mn>0</mn>
+          <mo>,</mo>
+          <mi>min</mi>
+          <mo>(</mo>
+          <msub><mi>t</mi><mtext>max</mtext></msub>
+          <mo>,</mo>
+          <mi>b</mi>
+          <mo>&#x22C5;</mo>
+          <msup><mn>2</mn><mi>n</mi></msup>
+          <mo>)</mo>
+          <mo>)</mo>
+        </mrow>
+      </math>
+      <p>Here is a small helper you can wrap around the ledger write:</p>
+<pre><code class="language-python">import random
+import time
+
+def with_backoff(fn, attempts=5, base=0.1, cap=3.0):
+    """Call fn, retrying with full-jitter exponential backoff."""
+    for n in range(attempts):
+        try:
+            return fn()
+        except LedgerBusyError:
+            if n == attempts - 1:
+                raise
+            time.sleep(random.uniform(0, min(cap, base * 2 ** n)))
+</code></pre>
+      <p>With <code>base=0.1</code> and <code>cap=3.0</code>, the longest each attempt can wait is:</p>
+      <figure>
+        <table>
+          <thead>
+            <tr><th>Attempt</th><th>Maximum wait</th><th>Total so far (worst case)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td><data value="0.1">0.1 s</data></td><td><data value="0.1">0.1 s</data></td></tr>
+            <tr><td>2</td><td><data value="0.2">0.2 s</data></td><td><data value="0.3">0.3 s</data></td></tr>
+            <tr><td>3</td><td><data value="0.4">0.4 s</data></td><td><data value="0.7">0.7 s</data></td></tr>
+            <tr><td>4</td><td><data value="0.8">0.8 s</data></td><td><data value="1.5">1.5 s</data></td></tr>
+          </tbody>
+        </table>
+      </figure>
+      <aside><strong>Note:</strong> Stripe expects a response within a few seconds and retries failed deliveries for up to three days on its own,<sup><a href="#source-2">2</a></sup> so keep the in-process total short and make the handler idempotent by checking the event id first.</aside>
+      <footer>
+        <h2>Sources</h2>
+        <ol>
+          <li id="source-1"><a href="https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/">AWS Architecture Blog: Exponential Backoff and Jitter</a></li>
+          <li id="source-2"><a href="https://docs.stripe.com/webhooks#retries">Stripe Docs: Webhook retries</a></li>
+        </ol>
+      </footer>
+    </section>
+
+    <section aria-label="Message from you">
+      <p><strong>You</strong></p>
+      <p>Makes sense. Should the event-id check happen before or after the retry loop?</p>
+    </section>
+
+    <section aria-label="Message from Atlas">
+      <p><strong>Atlas</strong></p>
+      <p>Before it. Record the event id in the same transaction as the ledger write, and skip the event if the id is already there.<sup><a href="#source-3">3</a></sup> That way a retry after a timeout that actually committed won't charge the ledger twice.</p>
+      <footer>
+        <h2>Sources</h2>
+        <ol start="3">
+          <li id="source-3"><a href="https://docs.stripe.com/webhooks#handle-duplicate-events">Stripe Docs: Handle duplicate events</a></li>
+        </ol>
+      </footer>
+    </section>
+
+    <form action="/chats/retry-backoff/messages" method="post">
+      <label for="message">Message Atlas</label>
+      <textarea id="message" name="message" maxlength="4000" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </article>
+</main>
+</body>
+</html>

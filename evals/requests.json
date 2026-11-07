@@ -1,0 +1,32 @@
+[
+  {
+    "id": "orders-admin",
+    "request": "Build an admin page for \"Crumb & Co.\", a bakery, to manage its online orders. It needs a sidebar with navigation, a top bar with an account menu (Profile, Settings, Sign out) that drops down from a button, a box that filters the orders table as you type, an orders table (order number, customer, date, total, status) that can be sorted by clicking any column, colored status labels, and a Refund button on each row that asks for confirmation in a dialog before refunding.",
+    "behaviors": ["dropdown", "filter", "sort", "dialog", "status-badges"]
+  },
+  {
+    "id": "signup",
+    "request": "Make a sign-up page for \"Trailhead\", a hiking club app: name, email, a password field people can reveal to check what they typed, a short bio limited to 160 characters with a visible count, a profile photo upload that accepts drag and drop, experience level, a terms checkbox, and clear error messages under the fields when something is wrong.",
+    "behaviors": ["password", "counter", "files", "validation"]
+  },
+  {
+    "id": "docs",
+    "request": "Write a documentation page for \"shipit\", a command-line deploy tool: a table of contents beside the article, built from its headings; headings people can link to; install and usage code blocks people can copy with one click; a table of command-line options; an FAQ where opening one answer closes the others; and abbreviations like CLI and CI explained on hover or tap.",
+    "behaviors": ["toc", "anchors", "copy", "accordion", "abbr"]
+  },
+  {
+    "id": "booking",
+    "request": "Build a booking page for \"Larkspur Cabins\": choose a cabin (radio buttons, each with its price), optional extras as checkboxes (breakfast, late checkout, firewood) with prices, and a total that updates live as the guest changes their choices. Guests can add the names of more guests one row at a time with an \"Add guest\" button. Include a small photo gallery where clicking a photo shows it larger.",
+    "behaviors": ["output", "clone", "zoom"]
+  },
+  {
+    "id": "release-notes",
+    "request": "Write a release notes page for \"Pebble\", a note-taking app, covering its last five releases. Show each release's date and time in the reader's own timezone, and say how long ago the newest one came out (like \"3 days ago\"). Older releases go in collapsible sections that stay open or closed the way the reader left them on their next visit. Include screenshots that can be enlarged.",
+    "behaviors": ["local-time", "relative-time", "remember", "zoom"]
+  },
+  {
+    "id": "chat",
+    "request": "Build a page that shows a conversation with an AI assistant called \"Atlas\", the way a chat app renders it: a few user messages and assistant replies in a narrow column. The assistant's replies are Markdown rendered to HTML and, between them, include a collapsible \"thinking\" section, a code block people can copy, a table, a note callout, a math formula, and numbered source citations with a list of sources. It must fit a phone screen.",
+    "behaviors": ["chat", "copy"]
+  }
+]

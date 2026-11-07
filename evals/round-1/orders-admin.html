@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orders · Crumb &amp; Co. Admin</title>
+<meta name="description" content="Manage Crumb &amp; Co. online orders: filter, sort, and refund.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tagbrush@1/tagbrush.min.css">
+<script src="https://cdn.jsdelivr.net/npm/tagaction@0/tagaction.min.js" defer></script>
+<style>
+  :root { --color-primary: #9a3412; }
+</style>
+</head>
+<body>
+<aside>
+  <nav aria-label="Sections">
+    <ul>
+      <li><a href="/admin">Dashboard</a></li>
+      <li><a href="/admin/orders" aria-current="page">Orders</a></li>
+      <li><a href="/admin/products">Products</a></li>
+      <li><a href="/admin/customers">Customers</a></li>
+      <li><a href="/admin/pickup">Pickup schedule</a></li>
+      <li><a href="/admin/settings">Store settings</a></li>
+    </ul>
+  </nav>
+</aside>
+<header>
+  <nav>
+    <strong>Crumb &amp; Co.</strong>
+    <ul>
+      <li><a href="/help">Help</a></li>
+      <li>
+        <button class="outline" aria-expanded="false" aria-controls="account-menu">Rosa Mendel</button>
+        <ul id="account-menu">
+          <li><a href="/admin/profile">Profile</a></li>
+          <li><a href="/admin/account">Settings</a></li>
+          <li><a href="/logout">Sign out</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <header>
+    <hgroup>
+      <h1>Orders</h1>
+      <p>Online orders for pickup and delivery, last 7 days</p>
+    </hgroup>
+    <a class="button" href="/admin/orders/export.csv">Export CSV</a>
+  </header>
+  <search>
+    <input type="search" aria-label="Filter orders" aria-controls="orders-table" placeholder="Filter by order, customer, or status…" hidden>
+  </search>
+  <figure>
+    <table id="orders-table" class="striped">
+      <thead>
+        <tr><th>Order</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th data-tagaction="off"><span class="visually-hidden">Actions</span></th></tr>
+      </thead>
+      <tbody>
+          <tr><td><a href="/admin/orders/2318">#2318</a></td><td>Amelia Hart</td><td><time datetime="2026-11-07">Nov 7, 2026</time></td><td><data value="86.5">$86.50</data></td><td><mark data-tone="success">Paid</mark></td><td><button class="secondary" commandfor="refund-2318" command="show-modal" aria-label="Refund order #2318">Refund</button></td></tr>
+          <tr><td><a href="/admin/orders/2317">#2317</a></td><td>Diego Ramírez</td><td><time datetime="2026-11-07">Nov 7, 2026</time></td><td><data value="24.0">$24.00</data></td><td><mark data-tone="warning">Pending</mark></td><td><button class="secondary" commandfor="refund-2317" command="show-modal" aria-label="Refund order #2317">Refund</button></td></tr>
+          <tr><td><a href="/admin/orders/2316">#2316</a></td><td>Priya Natarajan</td><td><time datetime="2026-11-06">Nov 6, 2026</time></td><td><data value="142.75">$142.75</data></td><td><mark data-tone="info">Ready for pickup</mark></td><td><button class="secondary" commandfor="refund-2316" command="show-modal" aria-label="Refund order #2316">Refund</button></td></tr>
+          <tr><td><a href="/admin/orders/2315">#2315</a></td><td>Tom Whitaker</td><td><time datetime="2026-11-06">Nov 6, 2026</time></td><td><data value="9.5">$9.50</data></td><td><mark data-tone="success">Paid</mark></td><td><button class="secondary" commandfor="refund-2315" command="show-modal" aria-label="Refund order #2315">Refund</button></td></tr>
+          <tr><td><a href="/admin/orders/2314">#2314</a></td><td>Grace O'Connell</td><td><time datetime="2026-11-05">Nov 5, 2026</time></td><td><data value="58.0">$58.00</data></td><td><mark data-tone="neutral">Delivered</mark></td><td><button class="secondary" commandfor="refund-2314" command="show-modal" aria-label="Refund order #2314">Refund</button></td></tr>
+          <tr><td><a href="/admin/orders/2313">#2313</a></td><td>Kenji Watanabe</td><td><time datetime="2026-11-05">Nov 5, 2026</time></td><td><data value="312.0">$312.00</data></td><td><mark data-tone="success">Paid</mark></td><td><button class="secondary" commandfor="refund-2313" command="show-modal" aria-label="Refund order #2313">Refund</button></td></tr>
+          <tr><td><a href="/admin/orders/2312">#2312</a></td><td>Lucía Fernández</td><td><time datetime="2026-11-04">Nov 4, 2026</time></td><td><data value="37.25">$37.25</data></td><td><mark data-tone="error">Failed</mark></td><td><small>Not refundable</small></td></tr>
+          <tr><td><a href="/admin/orders/2311">#2311</a></td><td>Hannah Becker</td><td><time datetime="2026-11-03">Nov 3, 2026</time></td><td><data value="64.8">$64.80</data></td><td><mark data-tone="error">Refunded</mark></td><td><small>Not refundable</small></td></tr>
+          <tr><td><a href="/admin/orders/2310">#2310</a></td><td>Samuel Okafor</td><td><time datetime="2026-11-02">Nov 2, 2026</time></td><td><data value="120.0">$120.00</data></td><td><mark data-tone="neutral">Delivered</mark></td><td><button class="secondary" commandfor="refund-2310" command="show-modal" aria-label="Refund order #2310">Refund</button></td></tr>
+      </tbody>
+    </table>
+  </figure>
+  <dialog id="refund-2318">
+    <form method="post" action="/admin/orders/2318/refund">
+      <header>
+        <h2>Refund order #2318?</h2>
+        <button type="button" commandfor="refund-2318" command="close" aria-label="Close">✕</button>
+      </header>
+      <p>This refunds <strong>$86.50</strong> to Amelia Hart's card and emails them a receipt. It can't be undone.</p>
+      <footer>
+        <button type="button" class="secondary" commandfor="refund-2318" command="close">Cancel</button>
+        <button>Refund $86.50</button>
+      </footer>
+    </form>
+  </dialog>
+  <dialog id="refund-2317">
+    <form method="post" action="/admin/orders/2317/refund">
+      <header>
+        <h2>Refund order #2317?</h2>
+        <button type="button" commandfor="refund-2317" command="close" aria-label="Close">✕</button>
+      </header>
+      <p>This refunds <strong>$24.00</strong> to Diego Ramírez's card and emails them a receipt. It can't be undone.</p>
+      <footer>
+        <button type="button" class="secondary" commandfor="refund-2317" command="close">Cancel</button>
+        <button>Refund $24.00</button>
+      </footer>
+    </form>
+  </dialog>
+  <dialog id="refund-2316">
+    <form method="post" action="/admin/orders/2316/refund">
+      <header>
+        <h2>Refund order #2316?</h2>
+        <button type="button" commandfor="refund-2316" command="close" aria-label="Close">✕</button>
+      </header>
+      <p>This refunds <strong>$142.75</strong> to Priya Natarajan's card and emails them a receipt. It can't be undone.</p>
+      <footer>
+        <button type="button" class="secondary" commandfor="refund-2316" command="close">Cancel</button>
+        <button>Refund $142.75</button>
+      </footer>
+    </form>
+  </dialog>
+  <dialog id="refund-2315">
+    <form method="post" action="/admin/orders/2315/refund">
+      <header>
+        <h2>Refund order #2315?</h2>
+        <button type="button" commandfor="refund-2315" command="close" aria-label="Close">✕</button>
+      </header>
+      <p>This refunds <strong>$9.50</strong> to Tom Whitaker's card and emails them a receipt. It can't be undone.</p>
+      <footer>
+        <button type="button" class="secondary" commandfor="refund-2315" command="close">Cancel</button>
+        <button>Refund $9.50</button>
+      </footer>
+    </form>
+  </dialog>
+  <dialog id="refund-2314">
+    <form method="post" action="/admin/orders/2314/refund">
+      <header>
+        <h2>Refund order #2314?</h2>
+        <button type="button" commandfor="refund-2314" command="close" aria-label="Close">✕</button>
+      </header>
+      <p>This refunds <strong>$58.00</strong> to Grace O'Connell's card and emails them a receipt. It can't be undone.</p>
+      <footer>
+        <button type="button" class="secondary" commandfor="refund-2314" command="close">Cancel</button>
+        <button>Refund $58.00</button>
+      </footer>
+    </form>
+  </dialog>
+  <dialog id="refund-2313">
+    <form method="post" action="/admin/orders/2313/refund">
+      <header>
+        <h2>Refund order #2313?</h2>
+        <button type="button" commandfor="refund-2313" command="close" aria-label="Close">✕</button>
+      </header>
+      <p>This refunds <strong>$312.00</strong> to Kenji Watanabe's card and emails them a receipt. It can't be undone.</p>
+      <footer>
+        <button type="button" class="secondary" commandfor="refund-2313" command="close">Cancel</button>
+        <button>Refund $312.00</button>
+      </footer>
+    </form>
+  </dialog>
+  <dialog id="refund-2310">
+    <form method="post" action="/admin/orders/2310/refund">
+      <header>
+        <h2>Refund order #2310?</h2>
+        <button type="button" commandfor="refund-2310" command="close" aria-label="Close">✕</button>
+      </header>
+      <p>This refunds <strong>$120.00</strong> to Samuel Okafor's card and emails them a receipt. It can't be undone.</p>
+      <footer>
+        <button type="button" class="secondary" commandfor="refund-2310" command="close">Cancel</button>
+        <button>Refund $120.00</button>
+      </footer>
+    </form>
+  </dialog>
+</main>
+<footer><p>© 2026 Crumb &amp; Co. Bakery</p></footer>
+</body>
+</html>

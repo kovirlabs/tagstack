@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Join Trailhead · Hiking club</title>
+<meta name="description" content="Create your Trailhead account to find group hikes, log trails, and meet hikers near you.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tagbrush@1/tagbrush.min.css">
+<script src="https://cdn.jsdelivr.net/npm/tagaction@0/tagaction.min.js" defer></script>
+</head>
+<body>
+<header>
+  <nav><strong>Trailhead</strong><ul><li><a href="/hikes">Group hikes</a></li><li><a href="/trails">Trails</a></li><li><a href="/signup">Join</a></li><li><a href="/login">Sign in</a></li></ul></nav>
+</header>
+<main>
+  <article>
+    <hgroup>
+      <h1>Join Trailhead</h1>
+      <p>Find group hikes near you, log the trails you finish, and meet people who walk at your pace. Free to join.</p>
+    </hgroup>
+    <form action="/signup" method="post" enctype="multipart/form-data">
+      <label for="name">Full name</label>
+      <input id="name" name="name" autocomplete="name" required>
+      <small>Shown to other hikers on group hikes you join.</small>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" autocomplete="email" required>
+      <small>We send hike reminders and trail alerts here. Never shared.</small>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" autocomplete="new-password" required minlength="10">
+      <small>At least 10 characters.</small>
+
+      <label for="bio">Short bio (optional)</label>
+      <textarea id="bio" name="bio" maxlength="160" placeholder="Weekend peak-bagger, slow on the climbs, always carries extra snacks."></textarea>
+      <small>Up to 160 characters. Tell the group what kind of hikes you like.</small>
+
+      <label for="photo">Profile photo (optional)</label>
+      <input type="file" id="photo" name="photo" accept="image/jpeg,image/png,image/webp">
+      <small>Choose a JPG, PNG, or WebP image, or drag one onto this field.</small>
+
+      <fieldset>
+        <legend>Experience level</legend>
+        <label><input type="radio" name="experience" value="beginner" required> Beginner: short, well-marked trails under 8 km</label>
+        <label><input type="radio" name="experience" value="intermediate"> Intermediate: day hikes with 500 m or more of climbing</label>
+        <label><input type="radio" name="experience" value="advanced"> Advanced: long days, scrambles, and overnight trips</label>
+      </fieldset>
+
+      <label><input type="checkbox" role="switch" name="newsletter" checked> Monthly email with new trails near me</label>
+      <label><input type="checkbox" name="terms" required> I agree to the <a href="/terms">terms of use</a> and the <a href="/safety">trail safety guidelines</a></label>
+
+      <button>Create my account</button>
+    </form>
+    <p>Already a member? <a href="/login">Sign in</a></p>
+  </article>
+</main>
+<footer><p>Trailhead is a community hiking club. Hike within your limits and leave no trace.</p></footer>
+</body>
+</html>

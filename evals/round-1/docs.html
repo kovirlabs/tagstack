@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>shipit docs · Command-line deploys</title>
+<meta name="description" content="Install shipit, deploy your first site, and look up every command-line option.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tagbrush@1/tagbrush.min.css">
+<script src="https://cdn.jsdelivr.net/npm/tagaction@0/tagaction.min.js" defer></script>
+</head>
+<body>
+<header>
+  <nav><strong>shipit docs</strong><ul><li><a href="docs.html">Guide</a></li><li><a href="#options">Options</a></li><li><a href="https://github.com/shipit-cli/shipit">GitHub</a></li></ul></nav>
+</header>
+<main>
+  <aside><nav data-tag-toc aria-label="On this page"></nav></aside>
+  <article>
+    <nav aria-label="Breadcrumb"><ol><li><a href="docs.html">Docs</a></li><li><a aria-current="page">Getting started</a></li></ol></nav>
+    <hgroup>
+      <h1>Getting started with shipit</h1>
+      <p>Deploy a folder to any host from your terminal or your <abbr title="continuous integration">CI</abbr> pipeline in one command.</p>
+    </hgroup>
+    <p>shipit is a <abbr title="command-line interface">CLI</abbr> that builds, uploads, and activates a release of your site or service, then keeps the last five releases so you can roll back in seconds. It talks to hosts over <abbr title="Secure Shell">SSH</abbr> or to object storage such as <abbr title="Amazon Simple Storage Service">S3</abbr>.</p>
+
+    <h2 id="requirements">Requirements</h2>
+    <ul>
+      <li>Node.js 20 or later.</li>
+      <li>An SSH key or an <abbr title="application programming interface">API</abbr> token for your host.</li>
+      <li>Git, if you want shipit to tag each release with the commit it came from.</li>
+    </ul>
+
+    <h2 id="install">Install</h2>
+    <p>Install shipit globally with npm:</p>
+    <pre><code>npm install --global shipit</code></pre>
+    <p>Or, on macOS and Linux, with Homebrew:</p>
+    <pre><code>brew install shipit</code></pre>
+    <h3 id="verify">Check the install</h3>
+    <pre><code>shipit --version
+# shipit 3.4.1</code></pre>
+
+    <h2 id="usage">Usage</h2>
+    <p>Run <code>shipit</code> from the folder you want to publish. The first run asks for a target and writes it to <code>shipit.toml</code>.</p>
+    <pre><code>shipit deploy --target production</code></pre>
+    <h3 id="preview">Preview a deploy</h3>
+    <p>See which files would change without uploading anything:</p>
+    <pre><code>shipit deploy --target staging --dry-run</code></pre>
+    <h3 id="rollback">Roll back</h3>
+    <p>Switch back to the previous release. Press <kbd>Ctrl</kbd> + <kbd>C</kbd> at the prompt to cancel.</p>
+    <pre><code>shipit rollback --target production</code></pre>
+    <h3 id="ci">Deploy from CI</h3>
+    <p>In <abbr title="continuous integration">CI</abbr>, pass the token through an environment variable and skip the prompts:</p>
+    <pre><code>export SHIPIT_TOKEN="$DEPLOY_TOKEN"
+shipit deploy --target production --yes --quiet</code></pre>
+    <aside><strong>Tip:</strong> Run <code>shipit deploy --dry-run</code> on pull requests and the real deploy only on your main branch.</aside>
+
+    <h2 id="options">Command-line options</h2>
+    <p>Every option can also be set in <code>shipit.toml</code>. Options on the command line win. Click a column header to sort.</p>
+    <figure>
+      <table>
+        <thead>
+          <tr><th>Option</th><th>Short</th><th>Default</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>--target &lt;name&gt;</code></td><td><code>-t</code></td><td><code>staging</code></td><td>The target from <code>shipit.toml</code> to deploy to.</td></tr>
+          <tr><td><code>--dir &lt;path&gt;</code></td><td><code>-d</code></td><td><code>./dist</code></td><td>Folder to upload.</td></tr>
+          <tr><td><code>--dry-run</code></td><td><code>-n</code></td><td>off</td><td>List the changes without uploading.</td></tr>
+          <tr><td><code>--yes</code></td><td><code>-y</code></td><td>off</td><td>Answer yes to every prompt. Use this in CI.</td></tr>
+          <tr><td><code>--keep &lt;count&gt;</code></td><td><code>-k</code></td><td><code>5</code></td><td>How many old releases to keep for rollback.</td></tr>
+          <tr><td><code>--concurrency &lt;n&gt;</code></td><td><code>-c</code></td><td><code>8</code></td><td>Files uploaded at the same time.</td></tr>
+          <tr><td><code>--quiet</code></td><td><code>-q</code></td><td>off</td><td>Print only errors.</td></tr>
+          <tr><td><code>--config &lt;file&gt;</code></td><td>none</td><td><code>shipit.toml</code></td><td>Read settings from another file.</td></tr>
+        </tbody>
+      </table>
+    </figure>
+
+    <h2 id="faq">FAQ</h2>
+    <section data-tag-remember>
+      <details name="faq" id="faq-downtime" open>
+        <summary>Does a deploy cause downtime?</summary>
+        <p>No. shipit uploads the new release next to the current one and switches a symlink (or an object-storage prefix) only after every file is in place.</p>
+      </details>
+      <details name="faq" id="faq-secrets">
+        <summary>Where should I keep my token?</summary>
+        <p>In the <code>SHIPIT_TOKEN</code> environment variable, or in your CI provider's secret store. Never commit it to <code>shipit.toml</code>.</p>
+      </details>
+      <details name="faq" id="faq-monorepo">
+        <summary>Can I deploy several apps from one repository?</summary>
+        <p>Yes. Add a target per app in <code>shipit.toml</code>, each with its own <code>dir</code>, and run <code>shipit deploy --target</code> once for each.</p>
+      </details>
+      <details name="faq" id="faq-windows">
+        <summary>Does the CLI work on Windows?</summary>
+        <p>Yes, on Windows 10 and later with Node.js 20. Use PowerShell or Windows Terminal.</p>
+      </details>
+    </section>
+
+    <nav aria-label="Pagination">
+      <ul>
+        <li><a rel="prev" href="docs.html">← Introduction</a></li>
+        <li><a rel="next" href="configure.html">Configure →</a></li>
+      </ul>
+    </nav>
+  </article>
+</main>
+<footer><p>shipit is open source under the MIT license.</p></footer>
+</body>
+</html>
