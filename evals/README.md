@@ -75,12 +75,14 @@ Fixed:
 - **TagCheck's browser checks didn't say whether they ran**, and served only the main TagBrush.css build offline, so a chat page using the scoped build would have been measured unstyled. Two agents noticed they couldn't tell. TagCheck now serves every build offline, reports a stylesheet or script that doesn't load (`not-loaded`), and says when the browser checks ran (kovirlabs/tagcheck 550e8e5, unreleased).
 - **Which stylesheet a chat transcript page uses**: the guide only described the scoped build inside a chat app. The agent chose the full stylesheet with `data-density="compact"` on `<html>`, which is right; the TagBrush.css guide now says so (kovirlabs/tagbrush#40). The check was too strict and now accepts both.
 
-Open, for a decision before round 2:
+Decided after round 1 (November 8), to check in round 2:
 
-- **`<output>` can only add.** The booking agent couldn't multiply nights by a nightly rate, had to make the radio buttons' submitted values prices, and put the "$" outside the output. Whether TagAction should do more (a product, a format) is a scope question for the spec.
-- **An empty table of contents without JavaScript.** `<nav data-tag-toc>` is empty until TagAction fills it, so with JavaScript off the docs page (and TagKit's docs template) has an empty sidebar, and screen readers announce an empty "On this page" navigation.
-- **Where validation messages go** for a required radio group in a `<fieldset>` or a checkbox inside its `<label>`, and how a `maxlength` counter sits beside a `<small>` help text. The signup agent guessed; the TagAction guide could say.
-- **A confirm dialog on every table row.** The orders agent wrote one `<dialog>` per row, which works without script but repeats markup. A TagKit snippet could show the pattern.
+- **`<output>` can only add.** TagAction 0.2.0 adds `data-tag-calc="product"` (unchecked checkboxes and radios are left out, so listing a radio group multiplies by the chosen one) and `data-tag-format` (a currency code, `percent`, or `number`) (kovirlabs/tagaction 2eec635).
+- **An empty table of contents without JavaScript.** Write `<nav data-tag-toc hidden>`; TagAction 0.2.0 shows it, and a hidden element around it, once it's filled (kovirlabs/tagaction 2eec635). TagBrush.css gives an aside with only hidden content no sidebar column (kovirlabs/tagbrush#43). TagKit's docs template and the Jekyll layouts switch to `hidden` once TagAction 0.2.0 is on npm.
+- **Where validation messages go.** TagAction already had a rule; its guide now says it: after a checkbox's `<label>`, at the end of a radio group's `<fieldset>`, and the `maxlength` counter after help text (kovirlabs/tagaction 63ceeab).
+- **A confirm dialog on every table row.** One dialog per row is the plain-HTML answer, since it works without script. TagKit has a snippet for it now, `row-confirm` (kovirlabs/tagkit 3cd9cbe).
+- TagCheck's `contrast` rule uses 3:1 for large text, as WCAG AA does (kovirlabs/tagcheck a2800c7).
+
 - **Smaller gaps** the agents noted: no photo gallery snippet, no chat message markup (who said what), a relative time next to an absolute one, citation numbering across several answers, and whether a reference table should opt out of sorting.
 
 ## Limits
