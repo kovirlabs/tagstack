@@ -20,7 +20,7 @@ Each guide is complete for its tool. Read the guide for each tool you use; this 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Orders</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tagbrush@1/tagbrush.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tagbrush@2/tagbrush.min.css">
 <script src="https://cdn.jsdelivr.net/npm/tagaction@0/tagaction.min.js" defer></script>
 </head>
 <body>
@@ -51,10 +51,10 @@ TagBrush.css styles the page bar and the table; TagAction makes the columns sort
 
 - Native HTML first, then ARIA attributes, then a few documented `data-` attributes. Never invent classes or `data-tag…` attributes: TagCheck reports anything the guides don't document.
 - TagBrush.css documents exactly nine classes (`button`, `secondary`, `outline`, `container`, `grid`, `card`, `striped`, `visually-hidden`, `tagbrush`). TagAction adds none.
-- Family attributes: `data-theme`, `data-layout`, `data-tone`, `data-density="compact"`, `data-reasoning`, and `data-tagbrush="debug"` (TagBrush.css); `data-tagaction="off"`, `data-tag-remember`, `data-tag-time="relative"`, and `data-tag-toc` (TagAction).
+- Family attributes: `data-theme`, `data-layout`, `data-tone`, `data-density="compact"`, `data-reasoning`, and `data-tagbrush="debug"` (TagBrush.css); `data-tagaction="off"`, `data-tag-remember`, `data-tag-time="relative"`, `data-tag-toc`, `data-tag-theme`, `data-tag-match`, `data-tag-calc="product"`, and `data-tag-format` (TagAction).
 - Progressive enhancement: a page works with JavaScript off. A control that only works with TagAction carries `hidden`; TagAction shows it.
 - Each tool stands alone. TagBrush.css never needs JavaScript; TagAction never needs TagBrush.css; TagCheck checks any HTML.
-- One CDN URL per library, pinned to a major version (`tagbrush@1`, `tagaction@0`). TagAction releases say which TagBrush.css versions they are tested with.
+- One CDN URL per library, pinned to a major version (`tagbrush@2`, `tagaction@0`). TagAction releases say which TagBrush.css versions they are tested with.
 
 ## Not part of the family
 

@@ -52,4 +52,4 @@ curl -sI https://cdn.jsdelivr.net/npm/tagaction@0/tagaction.min.js | head -1   #
 npx @kovirlabs/tagcheck --version
 ```
 
-The CDN lines in every guide use the major version (`tagbrush@1`, `tagaction@0`), so pages pick up new minor and patch releases without changes.
+The CDN lines in every guide use the major version (`tagbrush@2`, `tagaction@0`), so pages pick up new minor and patch releases without changes.
